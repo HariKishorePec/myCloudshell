@@ -15,7 +15,7 @@ def index():
 @socketio.on('run_command')
 def handle_command(data):
     command = data.get('command')
-    
+    print('command received: ', command)
     if command:
         # Split the command for safety
         command = shlex.split(command)
