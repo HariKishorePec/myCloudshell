@@ -6,13 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud Shell</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+    <style>
+        .input {
+            margin: 5px;
+            padding: 2px;
+            font-size: 16px;
+            border: ghostwhite;
+            text-align: center;
+
+        }
+    </style>
 </head>
 
 <body>
     <h1>My Cloud Shell</h1>
 
     <div id="terminal"></div>
-    <input type="text" id="command" placeholder="Enter command" autofocus />
+    <input class="input" type="text" id="command" placeholder="Enter command" autofocus />
 
     <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
