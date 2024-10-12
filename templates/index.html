@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Shell</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+</head>
+
+<body>
+    <h1>Cloud Shell</h1>
+
+    <div id="terminal"></div>
+    <input type="text" id="command" placeholder="Enter command" autofocus />
+
+    <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+
+    <script>
+        const term = new Terminal();
+        term.open(document.getElementById('terminal'));
+        const socket = io.connect();
+
+        // Listen for command output
+        socket.on('command_output', (data) => {
+            term.writeln(data.output);
+        });
+
+        // Capture command input
+        const commandInput = document.getElementById('command');
+        commandInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const command = commandInput.value;
+                socket.emit('run_command', { command });
+                commandInput.value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
